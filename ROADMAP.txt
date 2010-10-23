@@ -1,6 +1,6 @@
 # PHYLO Map Maker Roadmap
 
-This is a simple roadmap of development & where the project is at.
+This is a simple roadmap of development & project status.
 
 - Chach
 
