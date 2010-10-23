@@ -1,0 +1,25 @@
+# PHYLO Map Maker Roadmap
+
+This is a simple roadmap of development & where the project is at.
+
+- Chach
+
+#### Development Schedule
+
+Working on this October/November/December 2010
+Goal is to have something workable by the winter holiday season.
+Then we will see what happens.
+
+#### Current Tasks
+* Setting up info architecture
+* Setting up test content
+* Adjusting interface language
+
+#### Planned
+* Map out related map styling options
+* Set up demo site
+* Provide demo database with some sample content
+* Figure out styling based on tagged taxonomy fields
+
+#### Completed
+* Pushed to github
