@@ -2,8 +2,6 @@
 
 This is a simple roadmap of development & project status.
 
-- Chach
-
 #### Development Schedule
 
 Working on this October/November/December 2010
@@ -23,3 +21,5 @@ Then we will see what happens.
 
 #### Completed
 * Made github repository
+
+- Chach
