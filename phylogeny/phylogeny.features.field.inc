@@ -331,7 +331,7 @@ function phylogeny_field_default_fields() {
       'bundle' => 'issue',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter two issues.',
+      'description' => 'Enter two terms to start your map.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -373,7 +373,7 @@ function phylogeny_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_issue',
-      'label' => 'The Issues',
+      'label' => 'Start terms',
       'required' => 0,
       'settings' => array(),
       'widget' => array(
@@ -480,7 +480,7 @@ function phylogeny_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '12',
+        'weight' => '13',
       ),
       'widget_type' => 'text_textarea_with_summary',
     ),
@@ -516,7 +516,8 @@ function phylogeny_field_default_fields() {
       'bundle' => 'note',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'What is the root of the note?
+Example.  If the \'seed\' of the note is \'Mom\' and you are adding a notes about your grandparents, a note about "Grandma" would connect to your mom.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -558,7 +559,7 @@ function phylogeny_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_parent',
-      'label' => 'Parent',
+      'label' => 'Connects to',
       'required' => 0,
       'settings' => array(),
       'widget' => array(
@@ -566,7 +567,7 @@ function phylogeny_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '10',
       ),
     ),
   );
@@ -651,7 +652,7 @@ function phylogeny_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '11',
       ),
     ),
   );
@@ -673,11 +674,12 @@ function phylogeny_field_default_fields() {
       'module' => 'node_reference',
       'settings' => array(
         'referenceable_types' => array(
-          'article' => 0,
+          '0' => 0,
+          'article' => '',
           'issue' => 'issue',
-          'note' => 0,
-          'page' => 0,
-          'story' => 0,
+          'note' => '',
+          'page' => '',
+          'story' => '',
         ),
       ),
       'translatable' => '1',
@@ -729,7 +731,7 @@ function phylogeny_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_project',
-      'label' => 'Project',
+      'label' => 'Project note belongs to',
       'required' => 0,
       'settings' => array(),
       'widget' => array(
@@ -776,7 +778,9 @@ function phylogeny_field_default_fields() {
       'bundle' => 'note',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'A very short nickname for this note. 
+
+The whole system of note mapping is based on these short names. Looking up & assigning parents & relationships between notes, you will use this name.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -819,7 +823,7 @@ function phylogeny_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_term',
       'label' => 'Short name',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(),
       'widget' => array(
         'active' => 0,
@@ -829,7 +833,7 @@ function phylogeny_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '10',
+        'weight' => '9',
       ),
     ),
   );
@@ -917,7 +921,7 @@ function phylogeny_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '13',
+        'weight' => '12',
       ),
     ),
   );
@@ -1318,11 +1322,11 @@ function phylogeny_field_default_fields() {
 rgba(14, 156, 25, 0.3);',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'full' => array(
           'label' => 'above',
@@ -1345,7 +1349,78 @@ rgba(14, 156, 25, 0.3);',
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '1',
+        'weight' => '-4',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-relationship-field_icon'
+  $fields['taxonomy_term-relationship-field_icon'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_icon',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'fid' => array(
+          '0' => 'fid',
+        ),
+      ),
+      'module' => 'image',
+      'settings' => array(
+        'default_image' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '1',
+      'type' => 'image',
+    ),
+    'field_instance' => array(
+      'bundle' => 'relationship',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
+          'weight' => '1',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_icon',
+      'label' => 'Icon',
+      'required' => 0,
+      'settings' => array(
+        'alt_field' => 0,
+        'file_directory' => 'taxonomy/relationships',
+        'file_extensions' => 'png gif jpg jpeg',
+        'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '',
+        'title_field' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'image',
+        'settings' => array(
+          'preview_image_style' => 'thumbnail',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'image_image',
+        'weight' => '-3',
       ),
     ),
   );

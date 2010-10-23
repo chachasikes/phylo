@@ -6,10 +6,10 @@
 function phylogeny_views_default_views() {
   $views = array();
 
-  // Exported view: Disorganized
+  // Exported view: Organize
   $view = new view;
-  $view->name = 'Disorganized';
-  $view->description = 'Notes that are not yet organized';
+  $view->name = 'Organize';
+  $view->description = 'Notes to organize';
   $view->tag = '';
   $view->view_php = '';
   $view->base_table = 'node';
@@ -29,6 +29,18 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
+  /* Empty text: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'There are no notes to assign to projects.';
+  $handler->display->display_options['empty']['area']['format'] = '1';
   /* Field: Node: Delete link */
   $handler->display->display_options['fields']['delete_node']['id'] = 'delete_node';
   $handler->display->display_options['fields']['delete_node']['table'] = 'node';
@@ -133,6 +145,11 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Sort criterion: Fields: field_parent_relationship (field_parent_relationship) */
+  $handler->display->display_options['sorts']['field_parent_relationship_tid']['id'] = 'field_parent_relationship_tid';
+  $handler->display->display_options['sorts']['field_parent_relationship_tid']['table'] = 'field_data_field_parent_relationship';
+  $handler->display->display_options['sorts']['field_parent_relationship_tid']['field'] = 'field_parent_relationship_tid';
+  $handler->display->display_options['sorts']['field_parent_relationship_tid']['order'] = 'DESC';
   /* Argument: Fields: field_project (field_project) */
   $handler->display->display_options['arguments']['field_project_nid']['id'] = 'field_project_nid';
   $handler->display->display_options['arguments']['field_project_nid']['table'] = 'field_data_field_project';
@@ -167,10 +184,19 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['filters']['field_project_nid']['table'] = 'field_data_field_project';
   $handler->display->display_options['filters']['field_project_nid']['field'] = 'field_project_nid';
   
-/* Display: Organize */
-  $handler = $view->new_display('page', 'Organize', 'organize');
+/* Display: Unassigned Notes Page */
+  $handler = $view->new_display('page', 'Unassigned Notes Page', 'organize');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Organize';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['label'] = 'Instructions';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
+  $handler->display->display_options['header']['area']['content'] = 'Assign these notes to projects';
+  $handler->display->display_options['header']['area']['format'] = '1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Node: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -236,12 +262,30 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['delete_node']['empty_zero'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter: Node: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'note' => 'note',
+  );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter: Fields: field_project (field_project) */
+  $handler->display->display_options['filters']['field_project_nid']['id'] = 'field_project_nid';
+  $handler->display->display_options['filters']['field_project_nid']['table'] = 'field_data_field_project';
+  $handler->display->display_options['filters']['field_project_nid']['field'] = 'field_project_nid';
+  $handler->display->display_options['filters']['field_project_nid']['operator'] = 'empty';
   $handler->display->display_options['path'] = 'organize';
   
-/* Display: Attach Relationships */
-  $handler = $view->new_display('page', 'Attach Relationships', 'attach');
+/* Display: Attach Relationships Page */
+  $handler = $view->new_display('page', 'Attach Relationships Page', 'attach');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Attach';
+  $handler->display->display_options['title'] = 'Relate notes to Map';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
@@ -352,7 +396,7 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['filters']['tid']['operator'] = 'not';
   $handler->display->display_options['filters']['tid']['type'] = 'select';
   $handler->display->display_options['filters']['tid']['vocabulary'] = 'note_term';
-  $handler->display->display_options['path'] = 'attach/%';
+  $handler->display->display_options['path'] = 'attach';
   
 /* Display: Assign Projects Block */
   $handler = $view->new_display('block', 'Assign Projects Block', 'projects');
@@ -460,19 +504,61 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['filters']['field_parent_relationship_tid']['table'] = 'field_data_field_parent_relationship';
   $handler->display->display_options['filters']['field_parent_relationship_tid']['field'] = 'field_parent_relationship_tid';
   $handler->display->display_options['filters']['field_parent_relationship_tid']['operator'] = 'empty';
-  /* Filter: Fields: field_project (field_project) */
-  $handler->display->display_options['filters']['field_project_nid']['id'] = 'field_project_nid';
-  $handler->display->display_options['filters']['field_project_nid']['table'] = 'field_data_field_project';
-  $handler->display->display_options['filters']['field_project_nid']['field'] = 'field_project_nid';
-  $handler->display->display_options['filters']['field_project_nid']['operator'] = 'not empty';
+  
+/* Display: Note Map Block */
+  $handler = $view->new_display('block', 'Note Map Block', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Note Map';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* Empty text: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'There are no notes with relationships.';
+  $handler->display->display_options['empty']['area']['format'] = '1';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Argument: Fields: field_project (field_project) */
+  $handler->display->display_options['arguments']['field_project_nid']['id'] = 'field_project_nid';
+  $handler->display->display_options['arguments']['field_project_nid']['table'] = 'field_data_field_project';
+  $handler->display->display_options['arguments']['field_project_nid']['field'] = 'field_project_nid';
+  $handler->display->display_options['arguments']['field_project_nid']['default_action'] = 'empty';
+  $handler->display->display_options['arguments']['field_project_nid']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_project_nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_project_nid']['validate_type'] = 'node';
+  $handler->display->display_options['arguments']['field_project_nid']['validate_options']['types'] = array(
+    'issue' => 'issue',
+  );
+  $handler->display->display_options['arguments']['field_project_nid']['validate_options']['access'] = 0;
+  $handler->display->display_options['arguments']['field_project_nid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_project_nid']['not'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter: Node: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'note' => 'note',
+  );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  /* Filter: Fields: field_parent_relationship (field_parent_relationship) */
+  $handler->display->display_options['filters']['field_parent_relationship_tid']['id'] = 'field_parent_relationship_tid';
+  $handler->display->display_options['filters']['field_parent_relationship_tid']['table'] = 'field_data_field_parent_relationship';
+  $handler->display->display_options['filters']['field_parent_relationship_tid']['field'] = 'field_parent_relationship_tid';
+  $handler->display->display_options['filters']['field_parent_relationship_tid']['operator'] = 'not empty';
 
   $views[$view->name] = $view;
 
-  // Exported view: Issue
+  // Exported view: Projects
   $view = new view;
-  $view->name = 'Issue';
+  $view->name = 'Projects';
   $view->description = 'Loads list of projects or a single project.';
-  $view->tag = 'phylogeny';
+  $view->tag = '';
   $view->view_php = '';
   $view->base_table = 'node';
   $view->is_cacheable = FALSE;
@@ -811,6 +897,19 @@ function phylogeny_views_default_views() {
   $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['nid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['nid']['not'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter: Node: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'issue' => 'issue',
+  );
+  /* Filter: Node: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['path'] = 'projects/%';
 
   $views[$view->name] = $view;

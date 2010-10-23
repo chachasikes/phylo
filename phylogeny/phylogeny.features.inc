@@ -10,7 +10,7 @@ function phylogeny_node_info() {
       'base' => 'node_content',
       'description' => t('An issue, brings together two notes.'),
       'has_title' => '1',
-      'title_label' => t('What to call the conflict?'),
+      'title_label' => t('Title'),
       'help' => '',
     ),
     'note' => array(

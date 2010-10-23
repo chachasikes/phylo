@@ -87,10 +87,6 @@ function issuenote_render_link() {
 
   $explanation = "explanation";
 
-
-
-
-
 /*
   $output = "<div>" . t($explanation);
   $link = l(t('Click here'), 'issuenote/link_callback/nojs/' . $path, array('attributes' => array('class' => array('use-ajax'))));
@@ -101,7 +97,6 @@ function issuenote_render_link() {
 //  ajax_deliver($page);
   echo $output;
 */
-
 
   $view_arg = $path[1];
   switch($path[0]) {

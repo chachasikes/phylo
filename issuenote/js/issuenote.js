@@ -13,8 +13,6 @@
       // Remove original class to prevent duplicates.
       $('.issuenote-ajax-processed').removeClass('issuenote-ajax');
 
-
-
     }
   };
 
@@ -23,7 +21,6 @@
     var link = $(event["currentTarget"]).attr("href");
 
     $(event["currentTarget"]).after('<div class="issuenote-display"></div>')
-
 
     $(event["currentTarget"]).removeClass('issuenote-ajax-processed');
 
