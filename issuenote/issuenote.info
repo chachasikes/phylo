@@ -1,0 +1,21 @@
+; $Id$
+
+name = Issue Note
+description = Interactive network of notes
+package = Issue Notes
+core = 7.x
+files[] = issuenote.module
+files[] = issuenote.install
+; files[] = issuenote.test
+
+; Views
+files[] = issuenote.views.inc
+files[] = issuenote.views_default.inc
+files[] = issuenote.views_default.inc
+files[] = issuenote_plugin_style_treetable.inc
+
+; Javascript
+scripts[] = js/issuenote.js
+
+; CSS
+stylesheets[all][] = css/issuenote.css

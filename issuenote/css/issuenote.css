@@ -1,0 +1,43 @@
+.issuenote-display {
+
+  display: block;
+  height: auto;
+}
+
+.view-Issue > .view-content > .views-row {
+/*
+
+*/
+}
+
+.issue-pairing .view-content > .views-row {
+
+  padding: 10px;
+  margin: 10px;
+  list-style: none;
+  display: block;
+  height: auto;
+  clear: both;
+}
+
+.issue-pairing .view-content > .views-row {
+  float: left;
+  padding: 10px;
+  margin: 10px;
+  list-style: none;
+  display: block;
+  height: auto;
+  clear: both;
+/*
+  border-bottom: none;
+  padding: 10px;
+  display: block;
+  background: green;
+  border: 1px solid #ccc;
+  padding: 10px;
+*/
+}
+.view-note .views-row{
+/*   float: left; */
+}
+

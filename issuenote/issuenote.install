@@ -1,0 +1,41 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Install, update and uninstall functions for the issuenote module.
+ *
+ * This file contains the functions required to perform install, update and
+ * uninstall operations.
+ *
+ */
+
+/**
+ * Implements hook_install().
+ */
+function issuenote_install() {
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function issuenote_uninstall() {
+}
+
+/**
+ * Implements hook_schema().
+ */
+/*
+function issuenote_schema() {
+  $schema['issuenote'] = array(
+    'description' => 'Stores information of extended content.',
+    'fields' => array(
+      'nid'    => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+      'rating' => array('type' => 'int', 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+  ),
+    'primary key' => array('nid'),
+  );
+
+  return $schema;
+}
+*/
