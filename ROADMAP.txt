@@ -21,5 +21,6 @@ Then we will see what happens.
 
 #### Completed
 * Made github repository
+* Changed github user name
 
 - Chach
