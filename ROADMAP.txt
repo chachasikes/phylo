@@ -22,4 +22,4 @@ Then we will see what happens.
 * Figure out styling based on tagged taxonomy fields
 
 #### Completed
-* Pushed to github
+* Made github repository
